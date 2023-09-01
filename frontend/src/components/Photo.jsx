@@ -4,10 +4,11 @@ import PhotoFavButton from "./PhotoFavButton";
 
 // component for the image displayed in photodetails modal
 const Photo = (props) => {
+  console.log("props", props);
   return (
     <div>
       <div>
-        <PhotoFavButton favorites={props.favorites} id={props.id} onClick={() => props.onLiked(id)} />
+        <PhotoFavButton favorites={props.favorites} id={props.id} onLikedPhoto={props.onLikedPhoto} />
         <img src={props.img} alt="" className="photo-details-modal__image" />
       </div>
       <div className="photo-details-modal__photographer-details">

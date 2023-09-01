@@ -12,12 +12,13 @@ function PhotoFavButton(props) {
     } else {
       setIsFavorited(true);
     }
+    console.log("inside handle fav click", props.id);
+    props.onLikedPhoto(props.id);
   };
   return (
     <div className="photo-list__fav-icon">
-      <div className="photo-list__fav-icon-svg" onClick={props.onClick}>
+      <div className="photo-list__fav-icon-svg" onClick={handleFavClick}>
       <FavIcon selected={props.favorites?.includes(props.id)} />
-      {/* <FavIcon selected={props.favorites} /> */}
       </div>
     </div>
   );

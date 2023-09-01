@@ -13,18 +13,15 @@ const HomeRoute = (props) => {
    const [photo, setPhoto] = useState(null); // State to hold the selected photo details
 
    const toggleFavorite = (photoId) => {
+    console.log("toggle favvv");
 
   const indexOfPhoto = favorites.indexOf(photoId);
   if (indexOfPhoto === -1) {
-    setFavorites(favorites.concat(photoId))
+    setFavorites(favorites.concat(photoId));  
   } else {
     setFavorites(favorites.filter((favoriteId) => favoriteId !== photoId ))
   }
    };
-   //modal
-  //  let photo = null;
-   // if selected photo id is not null,           
-   // take photos , loop and return the matching id , then set that to photo, wont work unless we have a selected photo id.
    const openModal = (photoId) => {
     setSelectedPhotoId(photoId); // set photo id TO selected photo id 
     setModal(true);
