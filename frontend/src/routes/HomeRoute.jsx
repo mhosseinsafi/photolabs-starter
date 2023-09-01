@@ -34,6 +34,7 @@ const HomeRoute = (props) => {
   const selectedPhoto = props.photos.find((photo) => photo.id === photoId);
   if (selectedPhoto) {
     setPhoto(selectedPhoto); // Set the selected photo details
+    console.log("whats going on", selectedPhoto);
   }
 };
 
@@ -48,7 +49,7 @@ const HomeRoute = (props) => {
       <TopNavigationBar topics={props.topics} hasLikedPhotos={favorites.length > 0} />
       <PhotoList photos={props.photos} onLikedPhoto={toggleFavorite} favorites={favorites} onPhotoClick={openModal} />
       {/* <PhotoDetailsModal isOpen={selectedPhotoId !== null} onClose={closeModal} /> */}
-      {modal && <PhotoDetailsModal closeModal={closeModal} photo={photo}  /> }
+      {modal && <PhotoDetailsModal closeModal={closeModal} photo={photo} onLikedPhoto={toggleFavorite} favorites={favorites} /> }
     </div>
   );
 };
