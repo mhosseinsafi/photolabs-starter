@@ -10,11 +10,10 @@ const PhotoDetailsModal = (props) => {   // pass in new prop which is photo
   const photoList = Object.values(props.photo.similar_photos);
   return (  
     <div className={`photo-details-modal `}>
-      <div className='photo-details-modal__images'>
       <button className="photo-details-modal__close-button" onClick={props.closeModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <div>  
+      <div className='photo-details-modal__images'> 
         <Photo 
           id={props.photo.id}  
           img={props.photo.urls.regular}
@@ -34,7 +33,6 @@ const PhotoDetailsModal = (props) => {   // pass in new prop which is photo
        onLikedPhoto={props.onLikedPhoto} favorites={props.favorites} />
       </div>
       </div>
-    </div>
   );
 };
 

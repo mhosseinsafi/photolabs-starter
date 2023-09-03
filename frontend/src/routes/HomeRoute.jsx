@@ -10,7 +10,6 @@ const HomeRoute = (props) => {
   const {state, openModal, closeModal, toggleFavorite, setPhoto } = useApplicationData ();
 
   const {favorites, modal, photo} = state;
-  console.log("favoritess???S?S?", favorites);
 
   return (
     <div className="home-route"> 
