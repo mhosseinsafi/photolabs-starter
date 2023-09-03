@@ -3,44 +3,15 @@ import '../styles/HomeRoute.scss';
 import TopNavigationBar from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 import PhotoDetailsModal from './PhotoDetailsModal';
+import useApplicationData from 'hooks/useApplicationData';
 
 
 const HomeRoute = (props) => {
-   const [favorites, setFavorites] = useState([]);
-   const [modal, setModal] = useState(false);
-   const [selectedPhotoId, setSelectedPhotoId] = useState(null);
-   //start hereeee
-   const [photo, setPhoto] = useState(null); // State to hold the selected photo details
+  const {state, openModal, closeModal, toggleFavorite, setPhoto } = useApplicationData ();
 
-   const toggleFavorite = (photoId) => {
-    console.log("toggle favvv");
+  const {favorites, modal, photo} = state;
+  console.log("favoritess???S?S?", favorites);
 
-  const indexOfPhoto = favorites.indexOf(photoId);
-  if (indexOfPhoto === -1) {
-    setFavorites(favorites.concat(photoId));  
-  } else {
-    setFavorites(favorites.filter((favoriteId) => favoriteId !== photoId ))
-  }
-   };
-   const openModal = (photoId) => {
-    setSelectedPhotoId(photoId); // set photo id TO selected photo id 
-    setModal(true);
-  
-
-  // Find the selected photo based on photoId
-  const selectedPhoto = props.photos.find((photo) => photo.id === photoId);
-  if (selectedPhoto) {
-    setPhoto(selectedPhoto); // Set the selected photo details
-    console.log("whats going on", selectedPhoto);
-  }
-};
-
-  const closeModal = () => {
-    setModal(false);
-    setPhoto(null); // Clear the selected photo details when closing the modal
-  };
-  console.log(props.photos);
-  console.log(selectedPhotoId);
   return (
     <div className="home-route"> 
       <TopNavigationBar topics={props.topics} hasLikedPhotos={favorites.length > 0} />

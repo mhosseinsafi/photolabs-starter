@@ -8,7 +8,6 @@ import PhotoList from 'components/PhotoList';
 const PhotoDetailsModal = (props) => {   // pass in new prop which is photo
   console.log('console log for propsss', props);
   const photoList = Object.values(props.photo.similar_photos);
-  console.log("lets see", photoList);
   return (  
     <div className={`photo-details-modal `}>
       <div className='photo-details-modal__images'>
