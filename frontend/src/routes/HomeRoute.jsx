@@ -13,8 +13,8 @@ const HomeRoute = (props) => {
 
   return (
     <div className="home-route"> 
-      <TopNavigationBar topics={props.topics} hasLikedPhotos={favorites.length > 0} />
-      <PhotoList photos={props.photos} onLikedPhoto={toggleFavorite} favorites={favorites} onPhotoClick={openModal} />
+      <TopNavigationBar topics={state.topicData} hasLikedPhotos={favorites.length > 0} />
+      <PhotoList photos={state.photoData} onLikedPhoto={toggleFavorite} favorites={favorites} onPhotoClick={openModal} />
       {/* <PhotoDetailsModal isOpen={selectedPhotoId !== null} onClose={closeModal} /> */}
       {modal && <PhotoDetailsModal closeModal={closeModal} photo={photo} onLikedPhoto={toggleFavorite} favorites={favorites} /> }
     </div>

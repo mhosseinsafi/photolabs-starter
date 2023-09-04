@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { useEffect } from "react";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -19,13 +20,17 @@ function reducer(state, action) {
       return {
         ...state, favorites: [...action.value]
       }
-    case 'ACTIONS.SET_PHOTO_DATA':
+    case 'SET_PHOTO_DATA':
       return {
-        ...state, photo: { ...action.value }
+        ...state, photoData: action.payload
       }
     case 'DISPLAY_PHOTO_DETAILS':
       return {
         ...state, photo: action.value.photo, modal: action.value.modal, selectedPhotoId: action.value.selectedPhotoId
+      }
+    case 'SET_TOPIC_DATA':
+      return {
+        ...state, topicData: action.payload
       }
 
     default:
@@ -40,7 +45,31 @@ export default function useApplicationData() {
     modal: false,
     selectedPhotoId: null,
     photo: null,
+    photoData: [],
+    topicData: [],
   });
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/photos')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: data,
+        })
+      })
+  }, [])
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/topics')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: ACTIONS.SET_TOPIC_DATA,
+          payload: data,
+        })
+      })
+  }, [])
 
   // const toggleFavorite = (photoId) => {
 
@@ -61,15 +90,15 @@ export default function useApplicationData() {
   const toggleFavorite = (photoId) => {
     const indexOfPhoto = state.favorites.indexOf(photoId);
     if (indexOfPhoto === -1) {
-        dispatch({
-          type: ACTIONS.FAV_PHOTO_ADDED,
-          value: photoId,
+      dispatch({
+        type: ACTIONS.FAV_PHOTO_ADDED,
+        value: photoId,
       })
     } else {
       dispatch({
         type: ACTIONS.FAV_PHOTO_REMOVED,
         value: state.favorites.filter(favoriteId => favoriteId !== photoId),
-    })
+      })
     }
   };
 
