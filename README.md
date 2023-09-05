@@ -3,6 +3,9 @@
 PhotoLabs is a web application project developed as part of the Web Development React course programming. It provides a platform for exploring and interacting with photos and topics in a user-friendly interface.
 
 # Photolabs
+!["main page"](https://github.com/mhosseinsafi/photolabs-starter/blob/main/docs/photo_Main_Page.jpg?raw=true)
+!["click on an image to make it larger"](https://github.com/mhosseinsafi/photolabs-starter/blob/main/docs/photo_openmodal_liked.jpg?raw=true)
+!["profile of the people"](https://github.com/mhosseinsafi/photolabs-starter/blob/main/docs/photo_profile_otherphoto.jpg?raw=true)
 
 ## Setup
 
