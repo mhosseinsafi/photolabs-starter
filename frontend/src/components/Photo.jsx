@@ -4,7 +4,7 @@ import PhotoFavButton from "./PhotoFavButton";
 
 // component for the image displayed in photodetails modal
 const Photo = (props) => {
-  console.log("props", props);
+
   return (
     <div>
       <div>

@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import { useEffect } from "react";
 
+//to hold action type constants.These constants are used to dispatch actions in the reducer.
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
@@ -10,6 +11,7 @@ export const ACTIONS = {
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
 };
 
+//handles state updates based on dispatched actions
 function reducer(state, action) {
   switch (action.type) {
     case 'FAV_PHOTO_ADDED':
@@ -38,6 +40,7 @@ function reducer(state, action) {
   }
 };
 
+//initializes the state using useReducer and sets up several functions to interact with the state
 export default function useApplicationData() {
 
   const [state, dispatch] = useReducer(reducer, {
@@ -49,12 +52,12 @@ export default function useApplicationData() {
     topicData: [],
   });
 
+  //fetches photo data associated with a selected topic when called
   const onTopicSelect = (id) => {
-    console.log("whats inside ID", id);
-    fetch('http://localhost:8001/api/topics/photos/'+ id)
+
+    fetch('http://localhost:8001/api/topics/photos/' + id)
       .then(res => res.json())
       .then(data => {
-        console.log("whats inside data", data);
         dispatch({
           type: ACTIONS.SET_PHOTO_DATA,
           payload: data,
@@ -62,6 +65,7 @@ export default function useApplicationData() {
       })
   };
 
+  //hooks are used to fetch initial data when the component using this hook mounts
   useEffect(() => {
     fetch('http://localhost:8001/api/photos')
       .then(res => res.json())
@@ -84,22 +88,7 @@ export default function useApplicationData() {
       })
   }, [])
 
-  // const toggleFavorite = (photoId) => {
-
-  //   const indexOfPhoto = state.favorites.indexOf(photoId);
-  //   if (indexOfPhoto === -1) {
-  //     setState((prev) => ({
-  //       ...prev,
-  //       favorites: prev.favorites.concat(photoId),
-  //     }))
-  //   } else {
-  //     setState((prev) => ({
-  //       ...prev,
-  //       favorites: prev.favorites.filter((favoriteId) => favoriteId !== photoId),
-  //     }))
-  //   }
-  // };
-
+  //toggles the favorite status of a photo by adding or removing its ID from the favorites array in the state.
   const toggleFavorite = (photoId) => {
     const indexOfPhoto = state.favorites.indexOf(photoId);
     if (indexOfPhoto === -1) {
@@ -115,15 +104,7 @@ export default function useApplicationData() {
     }
   };
 
-  // const openModal = (photoId, photo) => {
 
-  //   setState((prev) => ({
-  //     ...prev,
-  //     selectedPhotoId: photoId,
-  //     modal: true,
-  //     photo,
-  //   }))
-  // };
   const openModal = (photoId, photo) => {
     dispatch({
       type: ACTIONS.DISPLAY_PHOTO_DETAILS,
@@ -135,13 +116,6 @@ export default function useApplicationData() {
     });
   };
 
-  // const closeModal = () => {
-  //   setState((prev) => ({
-  //     ...prev,
-  //     modal: false,
-  //     photo: null,
-  //   }))
-  // };
   const closeModal = () => {
     dispatch({
       type: ACTIONS.DISPLAY_PHOTO_DETAILS,
@@ -153,12 +127,7 @@ export default function useApplicationData() {
     });
   };
 
-  // const setPhoto = (photo) => {
-  //   setState((prev) => ({
-  //     ...prev,
-  //     photo,
-  //   }))
-  // };
+
   const setPhoto = (photo) => {
     dispatch({
       type: ACTIONS.SET_PHOTO_DATA,
