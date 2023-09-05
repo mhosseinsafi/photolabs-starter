@@ -49,6 +49,19 @@ export default function useApplicationData() {
     topicData: [],
   });
 
+  const onTopicSelect = (id) => {
+    console.log("whats inside ID", id);
+    fetch('http://localhost:8001/api/topics/photos/'+ id)
+      .then(res => res.json())
+      .then(data => {
+        console.log("whats inside data", data);
+        dispatch({
+          type: ACTIONS.SET_PHOTO_DATA,
+          payload: data,
+        })
+      })
+  };
+
   useEffect(() => {
     fetch('http://localhost:8001/api/photos')
       .then(res => res.json())
@@ -161,6 +174,7 @@ export default function useApplicationData() {
     openModal,
     closeModal,
     setPhoto,
+    onTopicSelect,
   };
 };
 
